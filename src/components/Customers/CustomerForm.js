@@ -1,8 +1,11 @@
 import React,{useState} from 'react'
 import validator from 'validator'
-import {startGetCustomer} from '../../redux/actions/customerInfoAction'
-import {startUpdateCustomer} from '../../redux/actions/customerUpdateAction'
+import {startRegCustomer} from '../../redux/actions/customers/customerInfoAction'
+import {startUpdateCustomer} from '../../redux/actions/customers/customerUpdateAction'
 import {useDispatch} from 'react-redux'
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 
 const CustomerForm =(props)=>{
@@ -86,21 +89,21 @@ const CustomerForm =(props)=>{
             setCustname('')
             setEmail('')
             setMobile('')
-            dispatch(startGetCustomer(createCustomer))
+            dispatch(startRegCustomer(createCustomer))
 
         }else{
             setFormErrors(errors)
             console.log('formErrors', errors)
         }
     }
-    }
+}
 
     const handleformcancel = ()=>{
         setDisplayForm(!displayform)
     }
 
     return (
-        <div>
+        <>
             {
                 displayform ? 
                 <div>
@@ -122,7 +125,7 @@ const CustomerForm =(props)=>{
                     <button onClick={handleformcancel}>Cancel</button>
                 </div> : <></>
             }
-        </div>
+        </>
     )
 }
 

@@ -5,23 +5,24 @@ const customerInfoReducer = (state=InitialCustomersState, action)=>{
             return [...state,{...action.payload}]
         }
         case 'SET_DEL_CUST' :{
-            const result = state.filter((cust)=>{
-                return ! cust._id === action.payload
+            return state.filter((cust)=>{
+                return cust._id !== action.payload
             })
-            return [...state,...result]
         }
         case 'SET_UPDATE_CUST' : {
-            const updateResult = state.map((cust)=>{
+             return state.map((cust)=>{
                 if(cust._id === action.payload._id){
-                    return [...state,{...action.payload}]
+                    return {...cust, ...action.payload}
                 }else{
-                    return [...state]
+                    return {...cust}
                 }
             })
-            return [...state,...updateResult]
         }
         case 'SET_DEL_ALL_CUST' :{
             return InitialCustomersState
+        }
+        case 'SET_LIST_CUSTS' :{
+            return [...action.payload]
         }
         default :{
             return [...state]

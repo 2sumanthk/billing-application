@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux'
-import {startDeleteCustomer} from '../../redux/actions/customerDeleteAction'
+import {startDeleteCustomer} from '../../redux/actions/customers/customerDeleteAction'
 
 
 const CustomerDelete = (props)=>{
     const {id} = props
+    console.log("id at customer delete component", id)
 
     const dispatch = useDispatch()
 

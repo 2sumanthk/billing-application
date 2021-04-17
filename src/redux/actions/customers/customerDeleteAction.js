@@ -1,4 +1,5 @@
 import axios from 'axios'
+import swal from 'sweetalert'
 
 
 export const startDeleteCustomer = (id)=>{
@@ -16,9 +17,9 @@ export const startDeleteCustomer = (id)=>{
         .then((response)=>{
             console.log(response)
             const deletedCust = response.data
-            console.log("Customer delete Response", deletedCust._id)
+            console.log("Customer delete Response at customerDeleteAction", deletedCust._id)
             dispatch(setDeleteCustomer(deletedCust._id))
-            //alert("Customer Deleted Successfully Created")
+            swal({title : 'Customer Record Deleted Successfully',icon : 'success'})
         })
         .catch((err)=>{
             const msg = err.message

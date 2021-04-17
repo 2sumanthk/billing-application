@@ -5,24 +5,25 @@ const productsInfoReducer = (state=InitialProductsState, action)=>{
            return [{...action.payload}, ...state]
         }
         case 'SET_DEL_PROD' :{
-            const result = state.filter((prod)=>{
-                return ! prod._id === action.payload
+            return state.filter((prod)=>{
+                return  prod._id !== action.payload
             })
-            return [...state,...result]
         }
-        // case 'SET_UPDATE_CUST' : {
-        //     const updateResult = state.map((cust)=>{
-        //         if(cust._id === action.payload._id){
-        //             return [...state,{...action.payload}]
-        //         }else{
-        //             return [...state]
-        //         }
-        //     })
-        //     return [...state,...updateResult]
-        // }
+        case 'SET_UPDATE_PROD' : {
+            return state.map((prod)=>{
+                if(prod._id === action.payload._id){
+                    return {...prod,...action.payload}
+                }else{
+                    return {...prod}
+                }
+            })
+        }
         // case 'SET_DEL_ALL_CUST' :{
-        //     return InitialCustomersState
+        //     return InitialProductsState
         // }
+        case 'SET_LIST_PROD' : {
+            return [...action.payload]
+        }
         default :{
             return [...state]
         }

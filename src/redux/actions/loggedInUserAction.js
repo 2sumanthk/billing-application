@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {history} from '../../index'
+import swal from 'sweetalert'
 
 export const startGetloggedInUser = (loggedInUsers)=>{
     return (dispatch)=>{
@@ -10,7 +11,7 @@ export const startGetloggedInUser = (loggedInUsers)=>{
             if(Object.keys(result).includes('errors')){
                 alert(result.errors)
             }else{
-                alert("User Successfully Logged In")
+                swal({title : 'User Successfully Logged In !!',icon : 'success'})
                 dispatch(setLoggedInUsers(loggedInUsers))
                 localStorage.setItem('token',result.token)
                 history.push('/home') // navigate to home after successful login,

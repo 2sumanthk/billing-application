@@ -7,8 +7,8 @@ const ProductUpdate = (props)=>{
     const {_id, name, price} = props
     const [updateClick, setUpdateClick] = useState(false)
 
-    const handleUpdate = (cid)=>{
-        if(_id===cid){
+    const handleUpdate = (pid)=>{
+        if(_id===pid){
             setUpdateClick(!updateClick)
         }
     }

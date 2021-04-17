@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import ProductForm from './ProductForm'
 import ProductDelete from './ProductDelete'
 import ProductUpdate from './productUpdate'
+import {startListProduct} from '../../redux/actions/products/productListAction'
 
 
 
@@ -17,27 +18,16 @@ const ProductsList = (props)=>{
         return state.products_info
     })
 
-    console.log("from store state customers_info",products)
+    console.log("from store state products_info",products)
 
-
-    const loggedInUserToken = localStorage.getItem('token')
-    console.log("Received token at ProductsList comp", loggedInUserToken)
+    const dispatch = useDispatch()
 
     useEffect(()=>{
-        axios.get('https://dct-billing-app.herokuapp.com/api/products',{
-        headers :{
-            Authorization : `Bearer ${loggedInUserToken}`
-        }
-    })
-    .then((response)=>{
-        const result = response.data
-        setListProducts(result)
-
-    })
-    .catch((err)=>{
-        const msg = err.message
-        alert('Error while listing products, ProductsList comp',msg)
-    })
+        /* This dispatch function for listing of products gets called everytime the product list gets updated 
+        and once during every refresh */
+        
+        dispatch(startListProduct())
+        setListProducts(products)
     },[products])
 
     const handleProdCreate = ()=>{
@@ -47,7 +37,7 @@ const ProductsList = (props)=>{
 
     return (
         <div>
-            <h1>Customer Dashboard</h1>
+            <h1>Product Listing</h1>
             <button onClick={handleProdCreate}>Create a Product</button>
     
             {createProd ? <ProductForm/> : <></>}

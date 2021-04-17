@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
-import {startGetProduct} from '../../redux/actions/products/productCreateAction'
+import {startCreateProduct} from '../../redux/actions/products/productCreateAction'
+import {startUpdateProduct} from '../../redux/actions/products/productUpdateAction'
 import {useDispatch} from 'react-redux'
 
 
@@ -11,6 +12,7 @@ const ProductForm =(props)=>{
     const [displayform, setDisplayForm] = useState(true)
 
     const dispatch = useDispatch()
+
 
     const errors = {}
     
@@ -51,12 +53,12 @@ const ProductForm =(props)=>{
                 console.log('formData', createProduct)
                 setProdname('')
                 setPrice('')
-                dispatch(startGetProduct(createProduct))
+                dispatch(startUpdateProduct(createProduct, _id))
             }else{
                     setFormErrors(errors)
                     console.log('formErrors', errors)
             }
-    }
+        }
     else {
         //for new products
         setDisplayForm(!displayform)
@@ -71,7 +73,7 @@ const ProductForm =(props)=>{
             console.log('formData', createProduct)
             setProdname('')
             setPrice('')
-            dispatch(startGetProduct(createProduct))
+            dispatch(startCreateProduct(createProduct))
 
         }else{
             setFormErrors(errors)
@@ -97,7 +99,7 @@ const ProductForm =(props)=>{
                         {
                             formErrors.price && <div><span style={{color:'red'}}>{formErrors.price}</span><br/></div>
                         }
-                        <input type='submit' value = 'Save Product'/> 
+                        <input type='submit' value = {updateClick ? 'Update info' : 'Save Product'}/> 
                     </form> 
                     <button onClick={handleformcancel}>Cancel</button>
                 </div> : <></>

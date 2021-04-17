@@ -1,14 +1,12 @@
 import axios from 'axios'
 
 
-export const startCreateProduct = (createProduct)=>{
-
-    console.log("Action Creator",createProduct)
+export const startListProduct = ()=>{
 
     const loggedInUserToken = localStorage.getItem('token')
 
     return (dispatch)=>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/products',createProduct,{
+        axios.get('http://dct-billing-app.herokuapp.com/api/products',{
             headers : {
                 Authorization : `Bearer ${loggedInUserToken}`
             }
@@ -16,9 +14,8 @@ export const startCreateProduct = (createProduct)=>{
         .then((response)=>{
             console.log(response)
             const products = response.data
-            
-            console.log("Product Create Response", products)
-            dispatch(setCreateProducts(products))
+            console.log("Listing Products Response", products)
+            dispatch(setListProducts(products))
             
         })
         .catch((err)=>{
@@ -28,9 +25,9 @@ export const startCreateProduct = (createProduct)=>{
     }
 }
 
-export const setCreateProducts = (products)=>{
+export const setListProducts = (products)=>{
     return {
-        type : 'SET_CREATE_PROD',
+        type : 'SET_LIST_PROD',
         payload : products
     }
 }

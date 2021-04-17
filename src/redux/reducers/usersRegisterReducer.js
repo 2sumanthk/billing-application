@@ -1,5 +1,5 @@
 const InitialRegUserState = []
-const usersReducers = (state=InitialRegUserState, action)=>{
+const usersRegisterReducer = (state=InitialRegUserState, action)=>{
     switch (action.type){
         case 'SET_REG_USERS' :{
             return [...state,{...action.payload}]
@@ -9,4 +9,4 @@ const usersReducers = (state=InitialRegUserState, action)=>{
         }
 }
 }
-export default usersReducers
+export default usersRegisterReducer

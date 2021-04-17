@@ -1,7 +1,8 @@
 import axios from 'axios'
+import swal from 'sweetalert'
 
 
-export const startGetCustomer = (regCustomer)=>{
+export const startRegCustomer = (regCustomer)=>{
 
     console.log("Action Creator",regCustomer)
 
@@ -17,6 +18,7 @@ export const startGetCustomer = (regCustomer)=>{
             console.log(response)
             const customers = response.data
             console.log("Customer Reg Response", customers)
+            swal({title : 'Customer Successfully Created !!',icon : 'success'})
             dispatch(setRegCustomers(customers))
             //alert("Customer Entry Successfully Created")
         })

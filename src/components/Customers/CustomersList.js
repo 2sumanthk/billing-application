@@ -1,11 +1,12 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import CustomerForm from './CustomerForm'
 import {useSelector, useDispatch} from 'react-redux'
 import CustomerDelete from './CustomerDelete'
 import CustomerUpdate from './CustomerUpdate'
-import {startDeleteAllCustomers} from '../../redux/actions/customerDeleteAllAction'
+import {startDeleteAllCustomers} from '../../redux/actions/customers/customerDeleteAllAction'
+import {startListCustomers} from '../../redux/actions/customers/customersListAction'
+
 
 const CustomersList = (props)=>{
 
@@ -20,43 +21,35 @@ const CustomersList = (props)=>{
 
     const dispatch = useDispatch()
 
-    const loggedInUserToken = localStorage.getItem('token')
-    //console.log("Received token at CustomerList comp", loggedInUserToken)
 
     useEffect(()=>{
-        axios.get('https://dct-billing-app.herokuapp.com/api/customers',{
-        headers :{
-            Authorization : `Bearer ${loggedInUserToken}`
-        }
-    })
-    .then((response)=>{
-        const result = response.data
-        setListCustomers(result)
+    setListCustomers(customers)
 
-    })
-    .catch((err)=>{
-        const msg = err.message
-        alert('Error while listing customers, CustomersList comp',msg)
-    })
+    /* This dispatch function for listing of customers gets called everytime the customer list gets updated 
+    and once during every refresh */
+
+    dispatch(startListCustomers())
+
     },[customers])
 
     const handleCustCreate = ()=>{
         setCreateCust(!createCust)
     }
 
-    const handleDeleteAllCustomers = ()=>{
-        //dispatch(startDeleteAllCustomers(...listCustomers))
-    }
+    // const handleDeleteAllCustomers = ()=>{
+    //     console.log(listCustomers)
+    //     dispatch(startDeleteAllCustomers(listCustomers))
+    // }
 
     return (
         <div>
             <h1>Customer Dashboard</h1>
             <button onClick={handleCustCreate}>Create a Customer</button>
-            <button onClick={handleDeleteAllCustomers}>Delete All Customers</button>
+            {/* <button onClick={handleDeleteAllCustomers}>Delete All Customers</button> */}
             {createCust ? <CustomerForm/> : <></>}
             {
                 listCustomers.length ===0 && customers.length===0 ? 
-                <table border={1}>
+                <table border={1} >
                     <thead>
                         <tr>
                             <td>Name</td>

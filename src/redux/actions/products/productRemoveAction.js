@@ -18,7 +18,7 @@ export const startRemoveProduct = (id)=>{
             const deletedProd = response.data
             console.log("Customer delete Response", deletedProd._id)
             dispatch(setDeleteCustomer(deletedProd._id))
-            alert("Product Removed Successfully ")
+            //alert("Product Removed Successfully ")
         })
         .catch((err)=>{
             const msg = err.message

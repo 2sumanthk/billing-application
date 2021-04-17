@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {history} from '../../index'
+import swal from 'sweetalert'
 
 export const startGetRegUsers = (regUsers)=>{
     return (dispatch)=>{
@@ -8,7 +9,8 @@ export const startGetRegUsers = (regUsers)=>{
             console.log(response)
             const users = response.data
             dispatch(setRegUsers(users))
-            alert("User Successfully Created")
+            swal({title : 'Successfully Registered a User',icon : 'success'})
+
             history.push('/users/login')
         })
         .catch((err)=>{
