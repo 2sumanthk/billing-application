@@ -5,7 +5,7 @@
 - Helps us to Add and Remove Products as per business requirement.
 - Helps us to generate bills based on purchase dates.
 
-## Steps to use the Application
+## Steps to use Billing App
 - Login to Application, Register before loggin in if new user.
 - Create customers and products
 - Billing section will help to search products and customers and cretae the bills.
